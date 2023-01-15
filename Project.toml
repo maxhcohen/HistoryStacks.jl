@@ -1,0 +1,7 @@
+name = "HistoryStacks"
+uuid = "2a016b31-c3bc-44ff-af05-dc62eaa320b5"
+authors = ["Max Cohen <maxcohen@bu.edu>"]
+version = "0.1.0"
+
+[deps]
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
