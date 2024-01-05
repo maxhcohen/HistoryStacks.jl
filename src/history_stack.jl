@@ -78,19 +78,22 @@ function update!(H::HistoryStack, regressor, target)
             if isnotfull(H)
                 push!(H, regressor, target)
             else
-                temp = deepcopy(H)
-                λ0 = eigmin(temp)
+                temp_regressor = deepcopy(H.regressor)
+                temp_target = deepcopy(H.target)
+                λ0 = eigmin(H)
                 λ = []
                 for j in 1:H.M
                     insert!(H, j, regressor, target)
                     push!(λ, eigmin(H))
-                    H = deepcopy(temp)
+                    H.regressor = deepcopy(temp_regressor)
+                    H.target = deepcopy(temp_target)
                 end
                 λmax = maximum(λ)
                 if λmax > λ0
                     insert!(H, argmax(λ), regressor, target)
                 else
-                    H = deepcopy(temp)
+                    H.regressor = deepcopy(temp_regressor)
+                    H.target = deepcopy(temp_target)
                 end
             end
         end
